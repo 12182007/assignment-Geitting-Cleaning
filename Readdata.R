@@ -1,7 +1,7 @@
 ## 1 Download the file and put the file in the data folder
 if(!file.exists("./data")){dir.create("./data")}
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(fileUrl,destfile="./data/Dataset.zip",method="curl")
+download.file(fileUrl,destfile="./data/Dataset.zip")
 ##  2.Unzip the file
 unzip(zipfile="./data/Dataset.zip",exdir="./data")
 
@@ -16,27 +16,27 @@ files
 
 ##Read the Activity files
 
-dataActivityTest  <- read.table(file.path(path_rf, "test" , "Y_test.txt" ),header = FALSE)
-dataActivityTrain <- read.table(file.path(path_rf, "train", "Y_train.txt"),header = FALSE)
+dataActTest  <- read.table(file.path(path_rf, "test" , "Y_test.txt" ),header = FALSE)
+dataActTrain <- read.table(file.path(path_rf, "train", "Y_train.txt"),header = FALSE)
 
 #Read the Subject files
 
-dataSubjectTrain <- read.table(file.path(path_rf, "train", "subject_train.txt"),header = FALSE)
-dataSubjectTest  <- read.table(file.path(path_rf, "test" , "subject_test.txt"),header = FALSE)
+dataSubTrain <- read.table(file.path(path_rf, "train", "subject_train.txt"),header = FALSE)
+dataSubTest  <- read.table(file.path(path_rf, "test" , "subject_test.txt"),header = FALSE)
 
 #Read Fearures files
 
-dataFeaturesTest  <- read.table(file.path(path_rf, "test" , "X_test.txt" ),header = FALSE)
-dataFeaturesTrain <- read.table(file.path(path_rf, "train", "X_train.txt"),header = FALSE)
+dataFeatTest  <- read.table(file.path(path_rf, "test" , "X_test.txt" ),header = FALSE)
+dataFeatTrain <- read.table(file.path(path_rf, "train", "X_train.txt"),header = FALSE)
 
 
 ##Merges the training and the test sets to create one data set
 
 ##1.Concatenate the data tables by rows
 
-dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
-dataActivity<- rbind(dataActivityTrain, dataActivityTest)
-dataFeatures<- rbind(dataFeaturesTrain, dataFeaturesTest)
+dataSubject <- rbind(dataSubTrain, dataSubtTest)
+dataActivity<- rbind(dataActTrain, dataActTest)
+dataFeatures<- rbind(dataFeatTrain, dataFeatTest)
 
 ##2.set names to variables
 
@@ -52,9 +52,7 @@ Data <- cbind(dataFeatures, dataCombine)
 
 #Extracts only the measurements on the mean and standard deviation for each measurement
 
-#Subset Name of Features by measurements on the mean and standard deviation
 
-#i.e taken Names of Features with "mean()" or "std()"
 
 subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeaturesNames$V2)]
 
