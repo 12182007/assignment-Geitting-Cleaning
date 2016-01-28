@@ -3,13 +3,33 @@
 The following data frames were created by extracting data from the text files in the provided data set (UCI HAR Dataset):
 
 
+ The script Readata.R performs the 5 steps described in the course project's definition.
+
+    First, all the similar data is merged using the rbind() function. By similar, I address those files having the same number of columns and referring to the same entities.
+    Then, only those columns with the mean and standard deviation measures are taken from the whole dataset. After extracting these columns, they are given the correct names, taken from features.txt.
+    As activity data is addressed with values 1:6, I take the activity names and IDs from activity_labels.txt and they are substituted in the dataset.
+    On the whole dataset, those columns with vague column names are corrected.
+    Finally, I generate a new dataset with all the average measures for each subject and activity type (30 subjects * 6 activities = 180 rows). The output file is called averages_data.txt, and uploaded to this repository.
+
+Variables
+
+    
+
+The following data frames were created by extracting data from the text files in the provided data set (UCI HAR Dataset):
+
+features - contains all the features that were measured
+
 activityType - contains activities engaged by subject. Columns were renamed as "activityId" and "activityType"
 
 subjectTrain - contains subject id of each subject in training set. Column renamed as "subjectId"
 
 xTrain - contains measurements of features for each subject engaged in each activity in the training set. Columns renamed with column names of "features" dataframe
 
-features - contains all the features that were measured
+yTrain - contains activityId. Column renamed as "activityId"
+
+subjectTest - contains subject id of each subject in test set. Column renamed as "subjectId"
+
+xTest - contains measurements of features for each subject engaged in each activity in the test set. Columns renamed with column names of "features" dataframe
 
 yTest - contains activityId. Column renamed as "activityId"
 
@@ -22,11 +42,6 @@ testData - contains yTest, subjectTest and xTest data
 finalData1 - Obtained by merging "trainingData" and "testData" by "activityId"
 
 finalData - Only contains columns providing mean/std.dev of features
-yTrain - contains activityId. Column renamed as "activityId"
-
-subjectTest - contains subject id of each subject in test set. Column renamed as "subjectId"
-
-xTest - contains measurements of features for each subject engaged in each activity in the test set. Columns renamed with column names of "features" dataframe
 
 finalDatatbl - data frame converted using "tbl_df" in dplyr package
 
@@ -58,3 +73,6 @@ GSUB() was used to for pattern match and replacement, to give more descriptive n
 
 DPLYR package was used to SELECT, GROUP, SUMMARIZE "finalData" to produce a tidy data set containing average of measurements in "finalData" of each subject engaged in each of the 6 activities
 
+ 
+
+ 
